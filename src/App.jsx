@@ -38,7 +38,7 @@ function App() {
             <Route path="cabins" element={<Cabins />} />
             <Route path="users" element={<Users />} />
 
-            <Route path="settings" elemet={<Settings />} />
+            <Route path="settings" element={<Settings />} />
             <Route path="account" element={<Account />} />
           </Route>
 
