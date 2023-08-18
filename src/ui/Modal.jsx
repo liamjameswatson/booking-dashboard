@@ -1,5 +1,8 @@
 import styled from "styled-components";
 
+import { HiXMark } from "react-icons/hi2";
+import { createPortal } from "react-dom";
+
 const StyledModal = styled.div`
   position: fixed;
   top: 50%;
@@ -48,3 +51,20 @@ const Button = styled.button`
     color: var(--color-grey-500);
   }
 `;
+
+function Modal({ children, onClose }) {
+  return createPortal(
+    <Overlay>
+      <StyledModal>
+        <Button onClick={onClose}>
+          <HiXMark />
+        </Button>
+        <div>{children}</div>
+      </StyledModal>
+    </Overlay>,
+    //portal created, mocal will be created as a direct child  of document body, in DOM. To attach it to a element use - document.querySelector('')
+    document.body
+  );
+}
+
+export default Modal;
