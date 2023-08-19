@@ -1,10 +1,7 @@
-
 import styled from "styled-components";
 
 import { HiXMark } from "react-icons/hi2";
 import { createPortal } from "react-dom";
-import { cloneElement, createContext, useContext, useState } from "react";
-import { useOutsideClick } from "../hooks/useOutsideClick";
 
 const StyledModal = styled.div`
   position: fixed;
@@ -54,56 +51,20 @@ const Button = styled.button`
     color: var(--color-grey-500);
   }
 `;
-// 1) Create a new context
-const ModalContext = createContext();
 
-// 2) Create the parent component - that accepts children
-
-function Modal({ children }) {
-  const [openName, setOpenName] = useState("");
-  //close - set back to empty string
-  const close = () => setOpenName("");
-
-  //open just set OpenName - this will be cabin-form or whatever name is on the form
-  const open = setOpenName;
-
-  return (
-    <ModalContext.Provider value={{ openName, close, open }}>
-      {children}
-    </ModalContext.Provider>
-  );
-}
-
-function Open({ children, opens: opensWindowName }) {
-  const { open } = useContext(ModalContext);
-
-  return cloneElement(children, { onClick: () => open(opensWindowName) });
-}
-
-function Window({ children, name }) {
-  const { openName, close } = useContext(ModalContext);
-
-  const ref = useOutsideClick(close)
-
-  if (name !== openName) return null;
-
+function Modal({ children, onClose }) {
   return createPortal(
     <Overlay>
-      <StyledModal ref={ref}>
-        <Button onClick={close}>
+      <StyledModal>
+        <Button onClick={onClose}>
           <HiXMark />
         </Button>
-        <div>{cloneElement(children, { onCloseModal: close })}</div>
+        <div>{children}</div>
       </StyledModal>
     </Overlay>,
     //portal created, mocal will be created as a direct child  of document body, in DOM. To attach it to a element use - document.querySelector('')
     document.body
   );
 }
-
-// 3) Place these as properties on the Modal
-
-Modal.Open = Open;
-Modal.Window = Window;
 
 export default Modal;
