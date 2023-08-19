@@ -6,7 +6,7 @@ import CabinTable from "./CabinTable";
 // Compound component to display from or table.
 function AddCabin() {
   return (
-    
+    <div>
       <Modal>
         <Modal.Open opens="cabin-form">
           <Button>Add new Cabin</Button>
@@ -15,14 +15,14 @@ function AddCabin() {
           <CreateCabinForm />
         </Modal.Window>
 
-        <Modal.Open opens="table">
+        {/* <Modal.Open opens="table">
         <Button>Show Table</Button>
         </Modal.Open>
         <Modal.Window name="table">
         <CabinTable />
-      </Modal.Window>
+      </Modal.Window> */}
       </Modal>
-
+    </div>
   );
 }
 // function AddCabin() {
