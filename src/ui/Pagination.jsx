@@ -1,6 +1,8 @@
 import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 
+import { RESULTS_PER_PAGE } from "../utils/constants";
+
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
 
 const StyledPagination = styled.div`
@@ -59,8 +61,6 @@ const PaginationButton = styled.button`
   }
 `;
 
-const RESULTS_PER_PAGE = 10;
-
 function Pagination({ count }) {
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -86,13 +86,16 @@ function Pagination({ count }) {
   }
 
   // if only one page, don't show pagination
-  if(pageCount <= 1 )  return null
+  if (pageCount <= 1) return null;
 
   return (
     <StyledPagination>
       <P>
-        Showing <span>{(currentPage -1) * RESULTS_PER_PAGE + 1 }</span> to <span>{ currentPage === pageCount ? count : currentPage * RESULTS_PER_PAGE}</span> of <span>{count}</span>{" "}
-        results
+        Showing <span>{(currentPage - 1) * RESULTS_PER_PAGE + 1}</span> to{" "}
+        <span>
+          {currentPage === pageCount ? count : currentPage * RESULTS_PER_PAGE}
+        </span>{" "}
+        of <span>{count}</span> results
       </P>
 
       <Buttons>

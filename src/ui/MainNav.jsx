@@ -44,7 +44,6 @@ const StyledNavLink = styled(NavLink)`
     color: var(--color-grey-400);
     transition: all 0.3s;
   }
-
   &:hover svg,
   &:active svg,
   &.active:link svg,

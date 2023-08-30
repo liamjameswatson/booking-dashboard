@@ -83,7 +83,7 @@ export default Filter;
 //   border: none;
 
 //   ${(props) =>
-//     props.active &&
+//     props. &&
 //     css`
 //       background-color: var(--color-brand-600);
 //       color: var(--color-brand-50);
