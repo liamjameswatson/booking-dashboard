@@ -9,7 +9,7 @@ export function useBooking() {
     data: booking,
     error,
   } = useQuery({
-    queryKey: ["booking"],
+    queryKey: ["booking", bookingId],
     queryFn: () => getBooking(bookingId),
     retry: false, // normally react Query tried three times on a failed attempt... But sometimes there is no need... In this case, if there is an error, there is not going to be data in the param...
   });
