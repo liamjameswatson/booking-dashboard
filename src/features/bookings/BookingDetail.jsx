@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { HiArrowDownOnSquare, HiArrowUpOnSquare } from "react-icons/hi2";
 
 import BookingDataBox from "./BookingDataBox";
 import Row from "../../ui/Row";
@@ -8,11 +10,15 @@ import ButtonGroup from "../../ui/ButtonGroup";
 import Button from "../../ui/Button";
 import ButtonText from "../../ui/ButtonText";
 import Spinner from "../../ui/Spinner";
+import Modal from "../../ui/Modal";
+
+import ConfrimDelete from "../../ui/ConfirmDelete";
 
 import { useMoveBack } from "../../hooks/useMoveBack";
 import { useBooking } from "./useBooking";
-import { HiArrowDownOnSquare } from "react-icons/hi2";
-import { useNavigate } from "react-router-dom";
+import { useCheckout } from "../check-in-out/useCheckout";
+import { deleteBooking } from "../../services/apiBookings";
+import { useDeleteBooking } from "./useDeleteBooking";
 
 const HeadingGroup = styled.div`
   display: flex;
@@ -21,8 +27,12 @@ const HeadingGroup = styled.div`
 `;
 
 function BookingDetail() {
-  const { booking, isLoading } = useBooking();
   const navigate = useNavigate();
+  const { checkout, isCheckingOut } = useCheckout();
+
+  const { booking, isLoading } = useBooking();
+  const { deleteBooking, isDeleting } = useDeleteBooking();
+
 
   const moveBack = useMoveBack();
 
@@ -51,12 +61,38 @@ function BookingDetail() {
       <ButtonGroup>
         {/* if status is 'unconfirmed' display the check in button */}
         {status === "unconfirmed" && (
-          <Button
-            onClick={() => navigate(`/checkin/${bookingId}`)}
-          >
+          <Button onClick={() => navigate(`/checkin/${bookingId}`)}>
             Check in
           </Button>
         )}
+
+        {status === "checked-in" && (
+          <Button
+            icon={<HiArrowUpOnSquare />}
+            onClick={() => checkout(bookingId)}
+            disabled={isCheckingOut}
+          >
+            Check out
+          </Button>
+        )}
+
+        <Modal>
+          <Modal.Open opens='delete'>
+            <Button variation='danger'>Delete Booking</Button>
+          </Modal.Open>
+          <Modal.Window name="delete">
+            <ConfrimDelete
+              resourceName="booking"
+              disabled={isDeleting}
+              onConfirm={() => {
+                deleteBooking(bookingId, {
+                  // on  settled 
+                  onSettled: () => navigate(-1)
+                });
+              }}
+            />
+          </Modal.Window>
+        </Modal>
 
         <Button variation="secondary" onClick={moveBack}>
           Back
