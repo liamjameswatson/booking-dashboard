@@ -38,7 +38,7 @@ function CheckinBooking() {
   const moveBack = useMoveBack();
   const { checkin, isCheckingIn } = useCheckin();
 
-  if (isLoading || isLoadingSettings ) return <Spinner />;
+  if (isLoading || isLoadingSettings) return <Spinner />;
 
   const {
     id: bookingId,
@@ -55,7 +55,19 @@ function CheckinBooking() {
   function handleCheckin() {
     if (!confirmPaid) return;
 
-    checkin(bookingId);
+    if (addBreakfast) {
+      // update api with the breakfast and price
+      checkin({
+        bookingId,
+        breakfast: {
+          hasBreakfast: true,
+          extrasPrice: optionalBreakfastPrice,
+          totalPrice: totalPrice + optionalBreakfastPrice,
+        },
+      });
+    } else {
+      checkin({ bookingId, breakfast: {} }); //if no breakfast, send empty object, (don't update price/ breakfast)
+    }
   }
 
   return (
@@ -87,7 +99,6 @@ function CheckinBooking() {
           checked={confirmPaid}
           onChange={() => {
             setConfirmPaid((confirm) => !confirm);
-            setConfirmPaid(false);
           }}
           disabled={confirmPaid || isCheckingIn}
           id="conifrm"
