@@ -44,6 +44,9 @@ function Filter({ filterField, options }) {
 
   function handleClick(value) {
     searchParams.set(filterField, value); // /discount/ all || no-discount || with-discount
+
+    if (searchParams.get("page")) searchParams.set("page", 1); // sets page back to 1 for filtering... if on last page, and wanted to filter, it would lead to an error.  Example, on page 3, in param, but there is only one page for unconfirmed
+
     setSearchParamas(searchParams);
   }
 
