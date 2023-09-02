@@ -4,7 +4,7 @@ import Form from "../../ui/Form";
 import Input from "../../ui/Input";
 import FormRowVertical from "../../ui/FormRowVertical";
 import { useLogin } from "./useLogin";
-import SpinnerMini from '../../ui/SpinnerMini'
+import SpinnerMini from "../../ui/SpinnerMini";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
@@ -16,7 +16,16 @@ function LoginForm() {
     e.preventDefault();
     if (!email || !password) return;
 
-    login({ email, password });
+    login(
+      { email, password },
+      {
+        // reset form to empty fields
+        onSettled: () => {
+          setEmail("");
+          setPassword("");
+        },
+      }
+    );
   }
 
   return (
