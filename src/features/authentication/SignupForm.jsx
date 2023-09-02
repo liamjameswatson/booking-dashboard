@@ -23,15 +23,15 @@ function SignupForm() {
       </FormRow>
 
       <FormRow label="Email address" error={""}>
-        <Input type="email" id="email" />
+        <Input type="email" id="email" {...register('email', {required: 'This field is required' })}/>
       </FormRow>
 
       <FormRow label="Password (min 8 characters)" error={""}>
-        <Input type="password" id="password" />
+        <Input type="password" id="password" {...register('password', {required: 'This field is required' })}/>
       </FormRow>
 
       <FormRow label="Repeat password" error={""}>
-        <Input type="password" id="passwordConfirm" />
+        <Input type="password" id="passwordConfirm" {...register('passwordConfirm', {required: 'This field is required' })}/>
       </FormRow>
 
       <FormRow>
