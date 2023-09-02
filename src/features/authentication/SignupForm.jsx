@@ -12,7 +12,7 @@ import Input from "../../ui/Input";
 
 
 function SignupForm() {
-  const {register, formState} =  useForm()
+  const {register, formState, getValues} =  useForm()
   const { errors } = formState
 
 
@@ -27,11 +27,11 @@ function SignupForm() {
       </FormRow>
 
       <FormRow label="Password (min 8 characters)" error={""}>
-        <Input type="password" id="password" {...register('password', {required: 'This field is required' })}/>
+        <Input type="password" id="password" {...register('password', {required: 'This field is required', minLength: {value: 8, message: 'Password needs a minimum of 8 characters'} })}/>
       </FormRow>
 
       <FormRow label="Repeat password" error={""}>
-        <Input type="password" id="passwordConfirm" {...register('passwordConfirm', {required: 'This field is required' })}/>
+        <Input type="password" id="passwordConfirm" {...register('passwordConfirm', {required: 'This field is required', validate: (value) => value === getValues().password || 'Passwords need to match'})}/>
       </FormRow>
 
       <FormRow>
