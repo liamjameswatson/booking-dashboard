@@ -6,7 +6,7 @@ import Input from "../../ui/Input";
 
 
 
-// Email regex: /\S+@\S+\.\S+/
+// Email regex: \
 
 
 
@@ -23,7 +23,7 @@ function SignupForm() {
       </FormRow>
 
       <FormRow label="Email address" error={""}>
-        <Input type="email" id="email" {...register('email', {required: 'This field is required' })}/>
+        <Input type="email" id="email" {...register('email', {required: 'This field is required', pattern: {value: /\S+@\S+\.\S+/, message: 'Please provide a valid email address'}  })}/>
       </FormRow>
 
       <FormRow label="Password (min 8 characters)" error={""}>
