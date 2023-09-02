@@ -10,7 +10,6 @@ export function useLogin() {
   const { mutate: login, isLoading } = useMutation({
     mutationFn: ({ email, password }) => loginApi({ email, password }),
     onSuccess: (user) => {
-      // set the user into cache,  save re-fetching on login. React will use the 'user' query key and get the data from there.
       queryClient.setQueriesData(['user'], user)
       navigate("/dashboard");
       toast.success("Login successful");
