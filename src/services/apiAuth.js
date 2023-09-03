@@ -44,3 +44,25 @@ export async function logout() {
   const { error } = await supabase.auth.signOut();
   if (error) throw new Error(error.message);
 }
+
+export async function updateCurrentUser({ password, fullName, avatar }) {
+  // There are two seperate forms, so only the password or name can be updated at once.
+
+  // 1) update password or full name
+  let updateData;
+  // if password updateData will be an object with the password
+  if (password) updateData = { password };
+  // if fullName update data will a data object, for supabase
+  if (fullName) updateData = { data: { fullName } };
+
+  // pass the update data object into updateUser from supabase
+  const { data, error } = supabase.auth.updateUser(updateData);
+
+  if (error) throw new Error(error.message);
+
+  if (!avatar) return data;
+
+  // 2) Upload the avatar image
+
+  // 3) Update avatar in the user
+}
