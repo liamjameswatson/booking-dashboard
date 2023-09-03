@@ -27,7 +27,21 @@ function UpdateUserDataForm() {
     e.preventDefault();
 
     if (!fullName) return;
-    updateUser({ fullName, avatar });
+    updateUser(
+      { fullName, avatar },
+      {
+        onSuccess: () => {
+          setAvatar(null);
+          e.target.reset();
+        },
+      }
+    );
+  }
+
+  function handleCancel(e) {
+    // e.preventDefault();         // no seed for this, because this button has the html 5 attribute of reset
+    setFullName(currentFullName);
+    setAvatar(null);
   }
 
   return (
@@ -53,7 +67,12 @@ function UpdateUserDataForm() {
         />
       </FormRow>
       <FormRow>
-        <Button type="reset" variation="secondary" disabled={isUpdating}>
+        <Button
+          type="reset"
+          variation="secondary"
+          onClick={handleCancel}
+          disabled={isUpdating}
+        >
           Cancel
         </Button>
         <Button disabled={isUpdating}>Update account</Button>
