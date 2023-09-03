@@ -13,7 +13,7 @@ function SignupForm() {
   const { errors } = formState;
 
   function onSubmit({ fullName, email, password }) {
-    signup({ fullName, email, password }, {onSettled: () =>  reset()} );
+    signup({ fullName, email, password }, { onSettled: () => reset() });
   }
 
   return (
@@ -75,8 +75,14 @@ function SignupForm() {
 
       <FormRow>
         {/* type is an HTML attribute! */}
-        <Button variation="secondary" type="reset"
-        disabled={isLoading}>
+        <Button
+          variation="secondary"
+          // this html attribute will only clear the inputs
+          type="reset"
+          disabled={isLoading}
+          //reset is part of react hook form and will clear the error messages and inputs
+          onClick={reset}
+        >
           Cancel
         </Button>
         <Button disabled={isLoading}>Create new user</Button>
