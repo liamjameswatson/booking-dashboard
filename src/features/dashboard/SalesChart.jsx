@@ -58,7 +58,7 @@ const fakeData = [
 
 const isDarkMode = true;
 
-function SalesChart() {
+function SalesChart({bookings, numDays}) {
   const { isDarkMode } = useDarkMode();
 
   const colors = isDarkMode
