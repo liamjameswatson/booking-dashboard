@@ -4,7 +4,7 @@ import Heading from "../../ui/Heading";
 import {
   PieChart,
   Pie,
-  CartesianGrid,
+  Cell,
   Tooltip,
   XAxis,
   YAxis,
@@ -154,10 +154,18 @@ function DurationChart({ confirmedStays }) {
             dataKey="value"
             innerRadius={85}
             outerRadius={110}
-            cx='40%'
-            cy='50%'
+            cx="40%"
+            cy="50%"
             paddingAngle={3}
-          />
+          >
+            {startDataLight.map((entry) => (
+              <Cell
+                fill={entry.color}
+                stroke={entry.color}
+                key={entry.duration}
+              />
+            ))}
+          </Pie>
         </PieChart>
       </ResponsiveContainer>
     </ChartBox>
