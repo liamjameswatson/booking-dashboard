@@ -13,6 +13,7 @@ import {
   YAxis,
   ResponsiveContainer,
 } from "recharts";
+import { eachDayOfInterval, subDays } from "date-fns";
 
 const StyledSalesChart = styled(DashboardBox)`
   grid-column: 1 / -1;
@@ -58,8 +59,14 @@ const fakeData = [
 
 const isDarkMode = true;
 
-function SalesChart({bookings, numDays}) {
+function SalesChart({ bookings, numDays }) {
   const { isDarkMode } = useDarkMode();
+
+  const allDates = eachDayOfInterval({
+    start: subDays(new Date(), numDays - 1), //today - 7/30/90
+    end: new Date(), //today
+  });
+  console.log(allDates);
 
   const colors = isDarkMode
     ? {
@@ -100,18 +107,18 @@ function SalesChart({bookings, numDays}) {
             stroke={colors.totalSales.stroke}
             fill={colors.totalSales.fill}
             strokeWidth={2}
-            name='Total Sales'
-            unit='$'
+            name="Total Sales"
+            unit="$"
           />
-           {/* Extras sales area (such as breakfast) */}
+          {/* Extras sales area (such as breakfast) */}
           <Area
             dataKey="extrasSales"
             type="monotone"
             stroke={colors.extrasSales.stroke}
             fill={colors.extrasSales.fill}
             strokeWidth={2}
-            name='Extras Sales'
-            unit='$'
+            name="Extras Sales"
+            unit="$"
           />
         </AreaChart>
       </ResponsiveContainer>
