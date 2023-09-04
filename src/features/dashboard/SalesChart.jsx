@@ -93,6 +93,7 @@ function SalesChart() {
 
           <CartesianGrid strokeDasharray="4" />
           <Tooltip contentStyle={{ backgroundColor: colors.background }} />
+          {/* Total sales area */}
           <Area
             dataKey="totalSales"
             type="monotone"
@@ -100,6 +101,16 @@ function SalesChart() {
             fill={colors.totalSales.fill}
             strokeWidth={2}
             name='Total Sales'
+            unit='$'
+          />
+           {/* Extras sales area (such as breakfast) */}
+          <Area
+            dataKey="extrasSales"
+            type="monotone"
+            stroke={colors.extrasSales.stroke}
+            fill={colors.extrasSales.fill}
+            strokeWidth={2}
+            name='Extras Sales'
             unit='$'
           />
         </AreaChart>
