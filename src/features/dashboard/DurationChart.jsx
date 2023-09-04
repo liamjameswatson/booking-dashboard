@@ -5,6 +5,7 @@ import {
   PieChart,
   Pie,
   Cell,
+  Legend,
   Tooltip,
   XAxis,
   YAxis,
@@ -166,6 +167,15 @@ function DurationChart({ confirmedStays }) {
               />
             ))}
           </Pie>
+          <Tooltip />
+          <Legend
+            verticalAlign="middle"
+            align="right"
+            width="30%"
+            layout="vertical"
+            iconSize={15}
+            iconType='circle'
+          />
         </PieChart>
       </ResponsiveContainer>
     </ChartBox>
