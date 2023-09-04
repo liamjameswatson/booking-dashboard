@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { HiArrowDownOnSquare, HiArrowUpOnSquare } from "react-icons/hi2";
+import { HiArrowUpOnSquare } from "react-icons/hi2";
 
 import BookingDataBox from "./BookingDataBox";
 import Row from "../../ui/Row";
@@ -11,6 +11,7 @@ import Button from "../../ui/Button";
 import ButtonText from "../../ui/ButtonText";
 import Spinner from "../../ui/Spinner";
 import Modal from "../../ui/Modal";
+import Empty from "../../ui/Empty";
 
 import ConfrimDelete from "../../ui/ConfirmDelete";
 
@@ -33,10 +34,11 @@ function BookingDetail() {
   const { booking, isLoading } = useBooking();
   const { deleteBooking, isDeleting } = useDeleteBooking();
 
-
   const moveBack = useMoveBack();
 
   if (isLoading) return <Spinner />;
+
+  if (!booking) return <Empty resourceName="booking" />;
 
   const { status, id: bookingId } = booking;
 
@@ -77,8 +79,8 @@ function BookingDetail() {
         )}
 
         <Modal>
-          <Modal.Open opens='delete'>
-            <Button variation='danger'>Delete Booking</Button>
+          <Modal.Open opens="delete">
+            <Button variation="danger">Delete Booking</Button>
           </Modal.Open>
           <Modal.Window name="delete">
             <ConfrimDelete
@@ -86,8 +88,8 @@ function BookingDetail() {
               disabled={isDeleting}
               onConfirm={() => {
                 deleteBooking(bookingId, {
-                  // on  settled 
-                  onSettled: () => navigate(-1)
+                  // on  settled
+                  onSettled: () => navigate(-1),
                 });
               }}
             />
