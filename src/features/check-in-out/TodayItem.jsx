@@ -1,5 +1,8 @@
 import styled from "styled-components";
 
+import Tag from "../../ui/Tag";
+import { Flag } from "../../ui/Flag";
+
 const StyledTodayItem = styled.li`
   display: grid;
   grid-template-columns: 9rem 2rem 1fr 7rem 9rem;
@@ -22,9 +25,18 @@ const Guest = styled.div`
 function TodayItem({ activeBooking }) {
   const { id, status, guests, numNights } = activeBooking;
 
-  
+  return (
+    <StyledTodayItem>
+      {status === "unconfirmed" && <Tag type="green">Arriving</Tag>}
+      {status === "checked-in" && <Tag type="blue">Departing</Tag>}
 
-  return <StyledTodayItem>Item</StyledTodayItem>;
+      <Flag src={guests.countryFlag} alt={`Flag of ${guests.country}`} />
+    
+      <Guest>{guests.fullName}</Guest>
+      <div>{numNights} nights</div>
+    
+    </StyledTodayItem>
+  );
 }
 
 export default TodayItem;
