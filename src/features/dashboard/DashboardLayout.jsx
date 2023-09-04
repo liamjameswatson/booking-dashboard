@@ -33,7 +33,6 @@ function DashboardLayout() {
 
   return (
     <StyledDashboardLayout>
-      {/* Placeholder divs */}
       <Stats
         bookings={bookings}
         confirmedStays={confirmedStays}
