@@ -18,3 +18,13 @@ const StyledTodayItem = styled.li`
 const Guest = styled.div`
   font-weight: 500;
 `;
+
+function TodayItem({ activeBooking }) {
+  const { id, status, guests, numNights } = activeBooking;
+
+  
+
+  return <StyledTodayItem>Item</StyledTodayItem>;
+}
+
+export default TodayItem;
