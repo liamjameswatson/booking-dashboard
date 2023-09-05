@@ -90,7 +90,7 @@ function Toggle({ id }) {
 
   function handleClick(e) {
     e.stopPropagation();
-    console.log("click");
+  
     const rectangle = e.target.closest("button").getBoundingClientRect();
 
     setPosition({
@@ -112,7 +112,7 @@ function List({ id, children }) {
 
   // const ref = useOutsideClick(close);
   const ref = useOutsideClick(() => {
-    console.log("close from click outside");
+  
     close();
   }, false);
 

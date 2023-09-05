@@ -1,17 +1,13 @@
 import styled from "styled-components";
 import Heading from "../../ui/Heading";
-
 import {
-  PieChart,
-  Pie,
   Cell,
   Legend,
-  Tooltip,
-  XAxis,
-  YAxis,
+  Pie,
+  PieChart,
   ResponsiveContainer,
+  Tooltip,
 } from "recharts";
-
 import { useDarkMode } from "../../context/DarkModeContext";
 
 const ChartBox = styled.div`
@@ -119,8 +115,14 @@ const startDataDark = [
 ];
 
 function prepareData(startData, stays) {
-  // A bit ugly code, but sometimes this is what it takes when working with real data 😅
+  
 
+  // Ensure that stays is an array and not undefined
+  if (!Array.isArray(stays)) {
+    return startData;
+  }
+
+  
   function incArrayValue(arr, field) {
     return arr.map((obj) =>
       obj.duration === field ? { ...obj, value: obj.value + 1 } : obj
@@ -147,13 +149,12 @@ function prepareData(startData, stays) {
 
 function DurationChart({ confirmedStays }) {
   const { isDarkMode } = useDarkMode();
-
   const startData = isDarkMode ? startDataDark : startDataLight;
-
   const data = prepareData(startData, confirmedStays);
+
   return (
     <ChartBox>
-      <Heading as="h2">Stay Duration Summary</Heading>
+      <Heading as="h2">Stay duration summary</Heading>
       <ResponsiveContainer width="100%" height={240}>
         <PieChart>
           <Pie
