@@ -21,12 +21,9 @@ const StyledDashboardLayout = styled.div`
 function DashboardLayout() {
   const { bookings, isLoading: isLoadingRecentBookings } = useRecentBooking();
 
-  const { confirmedStays, isLoadingRecentStays, numDays } =
-    useRecentStays();
+  const { confirmedStays, isLoadingRecentStays, numDays } = useRecentStays();
 
   const { cabins, isLoading: isLoadingCabins } = useCabins();
-
-  console.log(bookings);
 
   if (isLoadingRecentBookings || isLoadingRecentStays || isLoadingCabins)
     return <Spinner />;

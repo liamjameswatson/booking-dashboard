@@ -62,7 +62,7 @@ export async function updateCurrentUser({ password, fullName, avatar }) {
 
   if (!avatar) return data;
 
-  console.log("avatar", avatar);
+  
 
   // 2) Upload the avatar image
 
