@@ -24,12 +24,23 @@ const Avatar = styled.img`
 
 function UserAvatar() {
   const { user } = useUser();
+
+  // Check if user is null before accessing user_metadata
+  if (!user) {
+    return null; // or display a loading state or something else
+  }
+
   const { fullName, avatar } = user.user_metadata;
 
-  return <StyledUserAvatar>
-    <Avatar src={avatar || 'default-user.jpg'} alt={`Avatar of ${fullName}`}/>
-  <span>{fullName}</span>
-    </StyledUserAvatar>;
+  return (
+    <StyledUserAvatar>
+      <Avatar
+        src={avatar || "default-user.jpg"}
+        alt={`Avatar of ${fullName}`}
+      />
+      <span>{fullName}</span>
+    </StyledUserAvatar>
+  );
 }
 
 export default UserAvatar;

@@ -38,8 +38,8 @@ function UpdateUserDataForm() {
     );
   }
 
-  function handleCancel(e) {
-    // e.preventDefault();         // no seed for this, because this button has the html 5 attribute of reset
+  function handleCancel() {
+  
     setFullName(currentFullName);
     setAvatar(null);
   }
