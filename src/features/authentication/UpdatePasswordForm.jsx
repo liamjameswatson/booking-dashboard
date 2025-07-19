@@ -9,6 +9,7 @@ import { useUpdateUser } from "./useUpdateUser";
 function UpdatePasswordForm() {
   const { register, handleSubmit, formState, getValues, reset } = useForm();
   const { errors } = formState;
+  
 
   const { updateUser, isUpdating } = useUpdateUser();
 

@@ -20,8 +20,7 @@ export async function login({ email, password }) {
     email,
     password,
   });
-
-  if (error) throw new Error(error.message);
+  if (error) throw new Error(error.message, data);
   console.log(data);
   return data;
 }
@@ -61,8 +60,6 @@ export async function updateCurrentUser({ password, fullName, avatar }) {
   if (error) throw new Error(error.message);
 
   if (!avatar) return data;
-
-  
 
   // 2) Upload the avatar image
 
