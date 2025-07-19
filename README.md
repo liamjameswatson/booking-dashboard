@@ -101,7 +101,7 @@ The Wild Oasis dashboard is built for hotel administrative teams to handle daily
 
 ## The Website
 
-[Live Demo – Visit The Wild Oasis](https://www.thewildoasis.xyz)
+[Live Demo – Visit The Wild Oasis](https://singular-moonbeam-f1476b.netlify.app/login)
 
 ---
 
