@@ -13,7 +13,6 @@ export async function getCabins() {
 
 // This function will create or edit a cabin
 export async function createEditCabin(newCabin, id) {
-  
   // new images will not have a suberbase url
   const hasImagePath = newCabin.image?.startsWith?.(supabaseUrl);
 
@@ -50,7 +49,7 @@ export async function createEditCabin(newCabin, id) {
   }
 
   // 2. If successful, upload image
-  
+
   // if already an image, return data
   if (hasImagePath) return data;
 

@@ -31,13 +31,12 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
   function onSubmit(data) {
     // is image a string (already created) or object (new image in FileList)
     const image = typeof data.image === "string" ? data.image : data.image[0];
-
+    console.log('image at start', image)
     if (isEditSession) {
       editCabin(
         { newCabinData: { ...data, image }, id: editId },
         {
-          onSuccess: (data) => {
-            
+          onSuccess: () => {
             reset();
             onCloseModal?.();
           },
@@ -47,20 +46,17 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
       createCabin(
         { ...data, image: image },
         {
-          onSuccess: (data) => {
-           
+          onSuccess: () => {
             reset();
             onCloseModal?.();
           },
         }
       );
     }
-
-    
   }
 
-  function onError(errors) {
-   
+  function onError(error) {
+    console.error(error);
   }
 
   return (

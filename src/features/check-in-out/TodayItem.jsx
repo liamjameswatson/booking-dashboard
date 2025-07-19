@@ -28,6 +28,7 @@ const Guest = styled.div`
 `;
 
 function TodayItem({ activeBooking }) {
+  console.log(activeBooking);
   const { id, status, guests, numNights } = activeBooking;
 
   return (
